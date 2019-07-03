@@ -1,0 +1,80 @@
+// Create with crueent name
+
+create table cob_analytics.dim_strains_table ( id varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL,  name varchar(45) NOT NULL, company varchar(45) NOT NULL, status varchar(20) NOT NULL,
+        indica_level float(10,3) NOT NULL, sativa_level float(10,3) , tetra_hydro_cannabinol float(10,3) ,
+        canna_bichromene float(10,3) , tetra_hydro_cannabinolic float(10,3), canna_bicyclol float(10,3), canna_bivarin float(10,3),
+        canna_bodiolic_acide float(10,3), tetra_hydro_cannabi_varin float(10,3), canna_bi_diol float(10,3),
+        canna_bi_nol float(10,3),canna_bi_gerol float(10,3), PRIMARY KEY(id));
+        
+create table cob_analytics.sample_plant_batches ( id varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL, name varchar(45) NOT NULL,
+        plant_batch_id varchar(40) NOT NULL, strain varchar(40) NOT NULL, organization varchar(40),
+        company varchar(40), PRIMARY KEY(id));
+
+create table cob_analytics.fact_lot_table ( company_id varchar(50) NOT NULL, organization_id varchar(50) NOT NULL, strain_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, harvest_batch_id varchar(50) NOT NULL, lot_id varchar(50) NOT NULL, item_id varchar(50) NOT NULL, sub_inventory_id varchar(50) NOT NULL, item_sku_weight FLOAT(10,3) NOT NULL, item_selling_price FLOAT(10,2) NOT NULL, lot_created_date_id datetime NOT NULL, lot_expiry_date_id datetime NOT NULL, package_tag_id varchar(20) NOT NULL,status varchar(45) NOT NULL, item_unit_quantity INT NOT NULL, item_units_sold INT NOT NULL, total_lot_weight FLOAT(10,3) NOT NULL,lot_weight_available FLOAT(10,3) NOT NULL, PRIMARY KEY (lot_id));
+
+create table cob_analytics.dim_harvest_batch_table ( company_id varchar(50) NOT NULL, organization_id varchar(50) NOT NULL, strain_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, harvest_batch_id varchar(50) NOT NULL, sub_inventory_id varchar(50) NOT NULL, batch_created_date_id datetime NOT NULL, batch_expiry_date_id datetime NOT NULL, total_weight FLOAT(10,3) NOT NULL, batch_weight_available FLOAT(10,3) NOT NULL, PRIMARY KEY (harvest_batch_id));
+
+create table cob_analytics.sample_yield_waste_lifecycle_table_1 ( company_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, strain_id varchar(50) NOT NULL, sub_inventory varchar(50) NOT NULL, plant_id varchar(50) NOT NULL, growing_phase varchar(50) NOT NULL, days_in_nursery INT, days_in_vegetative INT, days_in_flowering INT, status varchar(50) NOT NULL, stage_destroyed_in varchar(50) NOT NULL, plantation_date_id datetime NOT NULL, vegetative_entry_date_id datetime, flowering_entry_date_id datetime, harvesting_date_id datetime, harvested_output FLOAT(10,3), total_waste FLOAT(10,3), PRIMARY KEY (plant_id));
+
+create table cob_analytics.dim_companies_table ( id varchar(50) NOT NULL, company_name varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL, status varchar(50) NOT NULL, domain varchar(50) NOT NULL, PRIMARY KEY(id));
+
+create table cob_analytics.dim_organizations_table ( id varchar(50) NOT NULL, name varchar(50) NOT NULL, created_on datetime, modified_on datetime, license varchar(25) NOT NULL, parent_org varchar(45), city varchar(20) NOT NULL, zipcode varchar(20) NOT NULL, country_code varchar(20) NOT NULL, PRIMARY KEY(id));
+
+create table INVENTORY_TABLE ( id varchar(50) NOT NULL, company_id varchar(50) NOT NULL, created_on datetime NOT NULL, organization_id varchar(50) NOT NULL, status varchar(50) NOT NULL, name varchar(50) NOT NULL, PRIMARY KEY (id))
+
+
+
+
+
+
+
+
+// CREATE ALL TABLES
+
+	// plant_table
+	create table PLANT_TABLE ( company_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, plant_id varchar(50) NOT NULL, growing_phase varchar(50) NOT NULL, days_in_nursery INT, days_in_vegetative INT, days_in_flowering INT, status varchar(50) NOT NULL, stage_destroyed_in varchar(50) NOT NULL, plantation_date_id datetime NOT NULL, vegetative_entry_date_id datetime, flowering_entry_date_id datetime, harvesting_date_id datetime, harvested_output FLOAT(10,3), total_waste FLOAT(10,3), PRIMARY KEY (plant_id))
+
+
+	// company_table
+	create table COMPANY_TABLE ( id varchar(50) NOT NULL, company_name varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL, status varchar(50) NOT NULL, domain varchar(50) NOT NULL, PRIMARY KEY(id))
+
+
+	// Oraganization
+	create table ORGANIZATION_TABLE ( id varchar(50) NOT NULL, name varchar(50) NOT NULL, created_on datetime, modified_on datetime, license varchar(25) NOT NULL, parent_org varchar(45), city varchar(20) NOT NULL, zipcode varchar(20) NOT NULL, country_code varchar(20) NOT NULL, PRIMARY KEY(id) )
+
+	// strain
+	create table STRAIN_TABLE ( id varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL, 
+	name varchar(45) NOT NULL, company varchar(45) NOT NULL, status varchar(20) NOT NULL,
+        indica_level float(10,3) NOT NULL, sativa_level float(10,3) , tetra_hydro_cannabinol float(10,3) ,
+        canna_bichromene float(10,3) , tetra_hydro_cannabinolic float(10,3), canna_bicyclol float(10,3), canna_bivarin float(10,3),
+        canna_bodiolic_acide float(10,3), tetra_hydro_cannabi_varin float(10,3), canna_bi_diol float(10,3),
+        canna_bi_nol float(10,3),canna_bi_gerol float(10,3), PRIMARY KEY(id))
+
+
+	//plant batch
+	create table PLANT_BATCH_TABLE (id varchar(50) NOT NULL, created_on datetime NOT NULL, modified_on datetime NOT NULL,
+	name varchar(45) NOT NULL, plant_batch_id varchar(40) NOT NULL, strain varchar(40) NOT NULL, organization varchar(40),
+        company varchar(40), PRIMARY KEY(id))
+
+
+
+	// lot table
+	create table LOT_TABLE ( company_id varchar(50) NOT NULL, organization_id varchar(50) NOT NULL, strain_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, harvest_batch_id varchar(50) NOT NULL, lot_id varchar(50) NOT NULL, item_id varchar(50) NOT NULL, sub_inventory_id varchar(50) NOT NULL, item_sku_weight FLOAT(10,3) NOT NULL, item_selling_price FLOAT(10,2) NOT NULL, lot_created_date_id datetime NOT NULL, lot_expiry_date_id datetime NOT NULL, package_tag_id varchar(20) NOT NULL,status varchar(45) NOT NULL, item_unit_quantity INT NOT NULL, item_units_sold INT NOT NULL, total_lot_weight FLOAT(10,3) NOT NULL,lot_weight_available FLOAT(10,3) NOT NULL, PRIMARY KEY (lot_id))")
+
+	// harvest table
+	create table HARVEST_TABLE ( company_id varchar(50) NOT NULL, organization_id varchar(50) NOT NULL, strain_id varchar(50) NOT NULL, plant_batch_id varchar(50) NOT NULL, harvest_batch_id varchar(50) NOT NULL, sub_inventory_id varchar(50) NOT NULL, batch_created_date_id datetime NOT NULL, batch_expiry_date_id datetime NOT NULL, total_weight FLOAT(10,3) NOT NULL, batch_weight_available FLOAT(10,3) NOT NULL, PRIMARY KEY (harvest_batch_id))
+
+
+
+// 
+create table INVENTORY_TABLE ( id varchar(50) NOT NULL,company_id varchar(50) NOT NULL, created_on datetime NOT NULL, organization_id varchar(50) NOT NULL,  status varchar(50) NOT NULL, name varchar(50) NOT NULL,PRIMARY KEY (id))
+
+
+
+
+
+
+
+
+
+
